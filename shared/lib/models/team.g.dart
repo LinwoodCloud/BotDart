@@ -23,13 +23,15 @@ Map<String, dynamic> _$$_TeamToJson(_$_Team instance) => <String, dynamic>{
 
 _$_TeamMember _$$_TeamMemberFromJson(Map<String, dynamic> json) =>
     _$_TeamMember(
+      json['team'] as String,
       json['guildId'] as String,
       $enumDecodeNullable(_$TeamMemberRoleEnumMap, json['role']) ??
-          TeamMemberRole.member,
+          TeamMemberRole.invited,
     );
 
 Map<String, dynamic> _$$_TeamMemberToJson(_$_TeamMember instance) =>
     <String, dynamic>{
+      'team': instance.team,
       'guildId': instance.guildId,
       'role': _$TeamMemberRoleEnumMap[instance.role],
     };
@@ -38,4 +40,5 @@ const _$TeamMemberRoleEnumMap = {
   TeamMemberRole.admin: 'admin',
   TeamMemberRole.moderator: 'moderator',
   TeamMemberRole.member: 'member',
+  TeamMemberRole.invited: 'invited',
 };

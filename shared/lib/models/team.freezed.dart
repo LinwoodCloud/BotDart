@@ -203,9 +203,10 @@ TeamMember _$TeamMemberFromJson(Map<String, dynamic> json) {
 class _$TeamMemberTearOff {
   const _$TeamMemberTearOff();
 
-  _TeamMember call(String guildId,
-      [TeamMemberRole role = TeamMemberRole.member]) {
+  _TeamMember call(String team, String guildId,
+      [TeamMemberRole role = TeamMemberRole.invited]) {
     return _TeamMember(
+      team,
       guildId,
       role,
     );
@@ -221,6 +222,7 @@ const $TeamMember = _$TeamMemberTearOff();
 
 /// @nodoc
 mixin _$TeamMember {
+  String get team => throw _privateConstructorUsedError;
   String get guildId => throw _privateConstructorUsedError;
   TeamMemberRole get role => throw _privateConstructorUsedError;
 
@@ -235,7 +237,7 @@ abstract class $TeamMemberCopyWith<$Res> {
   factory $TeamMemberCopyWith(
           TeamMember value, $Res Function(TeamMember) then) =
       _$TeamMemberCopyWithImpl<$Res>;
-  $Res call({String guildId, TeamMemberRole role});
+  $Res call({String team, String guildId, TeamMemberRole role});
 }
 
 /// @nodoc
@@ -248,10 +250,15 @@ class _$TeamMemberCopyWithImpl<$Res> implements $TeamMemberCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? team = freezed,
     Object? guildId = freezed,
     Object? role = freezed,
   }) {
     return _then(_value.copyWith(
+      team: team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as String,
       guildId: guildId == freezed
           ? _value.guildId
           : guildId // ignore: cast_nullable_to_non_nullable
@@ -270,7 +277,7 @@ abstract class _$TeamMemberCopyWith<$Res> implements $TeamMemberCopyWith<$Res> {
           _TeamMember value, $Res Function(_TeamMember) then) =
       __$TeamMemberCopyWithImpl<$Res>;
   @override
-  $Res call({String guildId, TeamMemberRole role});
+  $Res call({String team, String guildId, TeamMemberRole role});
 }
 
 /// @nodoc
@@ -285,10 +292,15 @@ class __$TeamMemberCopyWithImpl<$Res> extends _$TeamMemberCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? team = freezed,
     Object? guildId = freezed,
     Object? role = freezed,
   }) {
     return _then(_TeamMember(
+      team == freezed
+          ? _value.team
+          : team // ignore: cast_nullable_to_non_nullable
+              as String,
       guildId == freezed
           ? _value.guildId
           : guildId // ignore: cast_nullable_to_non_nullable
@@ -304,11 +316,14 @@ class __$TeamMemberCopyWithImpl<$Res> extends _$TeamMemberCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TeamMember implements _TeamMember {
-  const _$_TeamMember(this.guildId, [this.role = TeamMemberRole.member]);
+  const _$_TeamMember(this.team, this.guildId,
+      [this.role = TeamMemberRole.invited]);
 
   factory _$_TeamMember.fromJson(Map<String, dynamic> json) =>
       _$$_TeamMemberFromJson(json);
 
+  @override
+  final String team;
   @override
   final String guildId;
   @JsonKey()
@@ -317,7 +332,7 @@ class _$_TeamMember implements _TeamMember {
 
   @override
   String toString() {
-    return 'TeamMember(guildId: $guildId, role: $role)';
+    return 'TeamMember(team: $team, guildId: $guildId, role: $role)';
   }
 
   @override
@@ -325,6 +340,7 @@ class _$_TeamMember implements _TeamMember {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _TeamMember &&
+            const DeepCollectionEquality().equals(other.team, team) &&
             const DeepCollectionEquality().equals(other.guildId, guildId) &&
             const DeepCollectionEquality().equals(other.role, role));
   }
@@ -332,6 +348,7 @@ class _$_TeamMember implements _TeamMember {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(team),
       const DeepCollectionEquality().hash(guildId),
       const DeepCollectionEquality().hash(role));
 
@@ -347,12 +364,14 @@ class _$_TeamMember implements _TeamMember {
 }
 
 abstract class _TeamMember implements TeamMember {
-  const factory _TeamMember(String guildId, [TeamMemberRole role]) =
-      _$_TeamMember;
+  const factory _TeamMember(String team, String guildId,
+      [TeamMemberRole role]) = _$_TeamMember;
 
   factory _TeamMember.fromJson(Map<String, dynamic> json) =
       _$_TeamMember.fromJson;
 
+  @override
+  String get team;
   @override
   String get guildId;
   @override
