@@ -7,9 +7,9 @@
 # style and format.
 #
 # If you want a smaller set of lints you can change this to specify
-# 'package:lints/core.yaml'. These are just the most critical lints
-# (the recommended set includes the core lints).
-# The core lints are also what is used by pub.dev for scoring packages.
+# 'package:lints/core.dart.yaml'. These are just the most critical lints
+# (the recommended set includes the core.dart lints).
+# The core.dart lints are also what is used by pub.dev for scoring packages.
 
 include: package:lints/recommended.yaml
 
@@ -23,7 +23,7 @@ include: package:lints/recommended.yaml
 #   exclude:
 #     - path/to/excluded/files/**
 
-# For more information about the core and recommended set of lints, see
+# For more information about the core.dart and recommended set of lints, see
 # https://dart.dev/go/core-lints
 
 # For additional information about configuring this file, see

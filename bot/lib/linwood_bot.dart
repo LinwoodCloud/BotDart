@@ -1,5 +1,6 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
+import 'package:shared/models/team.dart';
 
 final singleCommand =
     SlashCommandBuilder("help", "This is example help command", [])
@@ -20,6 +21,8 @@ void run(String token) {
         ..registerPlugin(CliIntegration())
         ..registerPlugin(IgnoreExceptions())
         ..connect();
+  var team = Team("");
+  team.toJson();
 
   IInteractions.create(WebsocketInteractionBackend(bot))
     ..registerSlashCommand(singleCommand)
